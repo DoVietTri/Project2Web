@@ -35,8 +35,12 @@ $(document).ready(function(){
 				}
 			}
 		});
-	});
 
-	
+	$('.view_info_order').on(click, function() {
+		$('#view_order_detail').modal({
+			show : true
+		})
+		console.log(111);
+	});
 });
 

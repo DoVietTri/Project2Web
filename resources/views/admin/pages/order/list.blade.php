@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <a href="{!! route('admin.order.delete', $val->id) !!}" type="button" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-info view_info_order" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button>
                         </td>
                     </tr>
                 @endforeach

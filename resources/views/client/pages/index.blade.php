@@ -100,21 +100,23 @@
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Bán chạy</h2>
                     <a href="" class="wid-view-more">Xem tất cả</a>
-                    <div class="single-wid-product">
-                        <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb">
-                        </a>
-                        <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                    @foreach($product_selling as $item)
+                        <div class="single-wid-product">
+                            <a href="{!! route('client.getSingle', [$item->id, $item->alias]) !!}"><img src="{!! asset('resources/upload/'.$item->image) !!}" alt="" class="product-thumb">
+                            </a>
+                            <h2><a href="{!! route('client.getSingle', [$item->id, $item->alias]) !!}">{!! $item->name !!}</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>{!! number_format($item->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($item->price, 0, ",", ".") !!} VNĐ</del>
+                            </div>
                         </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
+                    @endforeach    
                 </div>
             </div>
 
@@ -147,7 +149,7 @@
                     <div class="single-wid-product">
                         <a href="{!! route('client.getSingle', [$val->id, $val->alias]) !!}"><img src="{!! asset('resources/upload/'.$val->image) !!}" alt="" class="product-thumb">
                         </a>
-                        <h2><a href="single-product.html">{!! $val->name !!}</a></h2>
+                        <h2><a href="{!! route('client.getSingle', [$val->id, $val->alias]) !!}">{!! $val->name !!}</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>

@@ -20,10 +20,12 @@ class AdminController extends Controller
     }
     public function deleteOrder($id) {
     	$order = Order::find($id);
-    	$order_detail = Order::find($id)->orderdetail;
-
+    	\DB::table('order_details')->where('order_id',$id)->delete();
+    	
     	$order->delete();
-    	$order_detail->delete();
+
     	return redirect()->back();
     }
+
+    
 }

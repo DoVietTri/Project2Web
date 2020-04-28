@@ -37,7 +37,7 @@ class CartController extends Controller
     	$cart = ['id' => $id, 'name' => $product->name,'qty' => $qty, 'price' => $price, 'weight' => 0, 'options' => ['img' => $product->image]];
 		
 		Cart::add($cart);
-		return back();
+		return redirect()->back();
     }
 
     public function updateCart(Request $request, $id) {
@@ -99,6 +99,10 @@ class CartController extends Controller
             $orderdetail->quantity = $cart->qty;
             $orderdetail->product_id = $cart->id;
             $orderdetail->save();
+            \DB::table('products')->where('id', $cart->id)->increment('status');
+            $product = Product::find($cart->id);
+            $product->quantity = $product->quantity - $cart->qty;
+            $product->save();
         }
         //Mail::to($order->email)->send(new ShoppingMail($order, $orderdetails));
         Cart::destroy();
