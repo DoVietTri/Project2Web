@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Order;
 use App\OrderDetail;
+use DB;
 
 class AdminController extends Controller
 {
@@ -27,5 +28,16 @@ class AdminController extends Controller
     	return redirect()->back();
     }
 
+    public function orderDetail(Request $request,$id) {
+        
+        if ($request->ajax()) {
+
+            $orders = OrderDetail::with('product')->where('order_id', $id)->get();
+            $html = view('admin.pages.order.orderdetail', compact('orders'))->render();
+            
+            return response(['html' => $html]);
+
+        }
     
+    }
 }

@@ -8,39 +8,16 @@ function confirmDelete(msg) {
 }
 
 $(document).ready(function(){
-	$("a#del_img_demo").on('click', function (){
-		var url = "http://localhost/WebGiay/admin/product/delImg/";
-
-		var _token = $("form[name=frmEditProduct]").find("input[name='_token']").val();
-
-		var idHinh = $(this).parent().find("img").attr("idHinh");
-		var img = $(this).parent().find("img").attr("src");
-		var rid = $(this).parent().find("img").attr("id");
-		var idButton = $(this).parent().find("a").attr('idButton');
+	$(".view_info_order").click(function(){
+		let id = $(this).data('id');
 
 		$.ajax({
-			url: url + idHinh,
-			type: 'GET',
-			cache: false,
-			data: {
-				"_token":_token,
-				"idHinh": idHinh, 
-				"urlHinh" : img
-			},
-			success: function (data){
-				if (data == "Oke") {
-					$("#" + idButton).remove();
-				} else {
-					alert("Lỗi");
-				}
+			url : 'http://localhost/WebGiay/admin/order/order/detail/' + id,
+			type : 'get',
+			success: function(result) {
+				$('#view_order_detail .content').html(result.html);
+				console.log(111);
 			}
 		});
-
-	$('.view_info_order').on(click, function() {
-		$('#view_order_detail').modal({
-			show : true
-		})
-		console.log(111);
 	});
 });
-

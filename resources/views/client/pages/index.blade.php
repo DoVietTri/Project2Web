@@ -69,10 +69,11 @@
                                 <img src="{!! asset('resources/upload/'.$val->image) !!}" alt="">
                                 <div class="product-hover">
                                     @if(Auth::check())
-                                    <a href="{!! route('client.addCart', $val->id)  !!}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                                        <a href="{!! route('client.addCart', $val->id)  !!}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
                                     @else
-                                    <a href="{!! route('client.getLogin')  !!}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                                        <a href="{!! route('client.getLogin')  !!}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
                                     @endif
+                                    
                                     <a href="{!! route('client.getSingle', [$val->id, $val->alias]) !!}" class="view-details-link"><i class="fa fa-link"></i> Chi tiết</a>
                                 </div>
                             </div>

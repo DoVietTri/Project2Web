@@ -45,7 +45,7 @@
             </fieldset>
             <fieldset class="form-group">
                 <label>Hình ảnh đại diện</label>
-                <img style="height: 70px;" src="{!! asset('resources/upload/'.$product->image) !!}" >
+                <img style="height: 90px;" src="{!! asset('resources/upload/'.$product->image) !!}" >
                 <label style="margin-left: 30px;">Hình ảnh đại diện thay thế (nếu có)</label>
                 <input type="file" name="fImage">
                 <input type="hidden" name="img_current" value="{!! $product->image !!}">
@@ -53,8 +53,8 @@
             @foreach($product_img as $key => $item)
             <fieldset class="form-group">
                 <label>Hình ảnh detail thứ {!! $key + 1 !!}</label>
-                <img idHinh="{!! $item['id'] !!}" id="{!! $key !!}" style="height: 70px;" src="{!! asset('resources/upload/detail/'.$item['image']) !!}">
-                <a idButton="{!! $key !!}" href="javascript:void(0)" type="button" id="del_img_demo" class="btn btn-danger btn-circle" style="position: relative; top: -30px; left: -20px;"><i class="fa fa-times"></i></a>
+                <img idHinh="{!! $item['id'] !!}" id="{!! $key !!}" style="height: 90px;" src="{!! asset('resources/upload/detail/'.$item['image']) !!}">
+                <a idButton="{!! $key !!}" href="javascript:void(0)" type="button" id="del_img_demo" class="btn btn-danger btn-circle" style="position: relative; top: -30px; left: -20px; size: 30px"><i class="fa fa-times"></i></a>
                 <label style="margin-left: 30px;">Hình ảnh detail thay thế (nếu có) thứ {!! $key + 1 !!}</label>
                 <input type="file" name="fImageDetail[]">
             </fieldset>

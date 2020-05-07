@@ -29,6 +29,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $category = DB::table('categories')->orderBy('id', 'DESC')->get();
+        
+        // if (Session('cart')) {
+        //     $oldCart = Session::get('cart');
+        //     $cart = new Cart($oldCart);
+        // }
+
         View::share(['category' => $category]);
+    
     }
 }

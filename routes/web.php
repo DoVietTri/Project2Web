@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function(
 	Route::group(['prefix' => 'order'], function() {
 		Route::get('order', 'AdminController@getOrder')->name('admin.order');
 		Route::get('order/delete/{id}', 'AdminController@deleteOrder')->name('admin.order.delete');
+		Route::get('order/detail/{id}', 'AdminController@orderDetail')->name('admin.order.orderDetail');
 	});
 
 

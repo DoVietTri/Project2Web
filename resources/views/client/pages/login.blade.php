@@ -99,7 +99,7 @@
                                 <p class="lost_password">
                                     <a href="#">Quên mật khẩu?</a>
                                 </p>
-
+                                <div>Bạn chưa có tài khoản ? <a href="{!! route('client.getRegister') !!}" type="button" class="btn btn-primary">Đăng kí</a></div>
                                 <div class="clear"></div>
                             </form>
                         </div>                       

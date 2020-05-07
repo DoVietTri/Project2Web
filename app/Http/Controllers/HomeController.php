@@ -11,11 +11,19 @@ use DB;
 use View;
 use App\Product;
 use App\Slider;
+use App\Mail\ShoppingMail;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
 
 	public function index() {
+		// \Session::flash('toastr', [
+		// 	'type' => 'error',
+		// 	'message' => 'Thành công'
+		// ]);
+		Mail::to('tri.dv270999@gmail.com')->send(new ShoppingMail());
+
 		$cate = Category::orderBy('id', 'DESC')->get();
 		$product = DB::table('products')->orderBy('id', 'DESC')->get();
 		$product_new = DB::table('products')->orderBy('id', 'DESC')->skip(0)->take(3)->get();

@@ -19,6 +19,7 @@ class CartController extends Controller
 		$subtotal = Cart::subtotal(0, ",", ".");
 		return view('client.pages.cart', compact('content', 'subtotal'));
 	}
+    
     public function addCart($id, Request $req) {
     	$product = Product::find($id);
 
@@ -36,8 +37,19 @@ class CartController extends Controller
 
     	$cart = ['id' => $id, 'name' => $product->name,'qty' => $qty, 'price' => $price, 'weight' => 0, 'options' => ['img' => $product->image]];
 		
-		Cart::add($cart);
-		return redirect()->back();
+        if (Cart::add($cart)) {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Thêm sản phẩm vào giỏ thành công !'
+            ]);
+            return redirect()->back();
+        } else {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Thêm sản phẩm vào giỏ không thành công !'
+            ]);
+            return redirect()->back();
+        }	
     }
 
     public function updateCart(Request $request, $id) {

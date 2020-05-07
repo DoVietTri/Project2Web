@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <a href="{!! route('admin.order.delete', $val->id) !!}" type="button" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
-                            <button class="btn btn-info view_info_order" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-info view_info_order" data-id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button>
                         </td>
                     </tr>
                 @endforeach
@@ -59,6 +59,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal" tabindex="-1" role="dialog" id="view_order_detail" aria-labelledby="view_order_detail" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -70,24 +71,9 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>nike</td>
-                        <td>123</td>
-                        <td>456</td>
-                    </tr>
-                </tbody>
-            </table>
+           <div class="content">
+               
+           </div>
         </div>
       </div>
       <div class="modal-footer">

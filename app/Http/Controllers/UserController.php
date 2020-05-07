@@ -11,6 +11,10 @@ use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function getLogin() {
+        // \Session::flash('toastr', [
+        //  'type' => 'success',
+        //  'message' => 'Vui lòng đăng nhập trước khi mua hàng'
+        // ]);
 		return view('client.pages.login');
 	}
 
@@ -30,15 +34,39 @@ class UserController extends Controller
 		];
 
 		if (Auth::attempt($data)) {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng nhập thành công !'
+
+            ]);
 			return redirect()->route('index');
 		} else {
-			return redirect()->route('client.getLogin')->with(['flash_level' => 'danger', 'flash_message' => 'Đăng nhập không thành công']);
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Đăng nhập không thành công !'
+
+            ]);
+			return redirect()->route('client.getLogin');
 		}
 	}
 
 	public function getLogout() {
-		Auth::logout();
-		return redirect()->route('index');
+		if (Auth::logout()) {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Đăng xuất không thành công !'
+
+            ]);
+            return redirect()->back();
+        } else {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng xuất thành công !'
+
+            ]);
+            return redirect()->back();
+        }
+		
 	}
 
     public function getRegister() {
@@ -69,9 +97,16 @@ class UserController extends Controller
     	$user->remember_token = $request->_token;
     	$user->save();
 
-    	Auth::login($user);
-
-    	return redirect()->route('index');
+        if ($user) {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng kí thành công'
+            ]);
+            Auth::login($user);
+            return redirect()->route('index');
+        }
+	
+        return redirect()->back();	
     }
 
     public function getProfile() {
