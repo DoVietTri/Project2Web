@@ -76,6 +76,10 @@ Route::get('profile', 'UserController@getProfile')->name('client.getProfile');
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('category/{id}/{alias}', 'HomeController@getCategory')->name('client.Category');
 Route::get('product/{id}/{alias}', 'HomeController@getSingle')->name('client.getSingle');
+Route::get('search', 'HomeController@getSearch')->name('client.getSearch');
+Route::get('mylistorder', 'HomeController@getMyListOrder')->name('client.getMyListOrder');
+Route::get('myorderdetail/id', 'HomeController@getMyOrderDetail')->name('client.getMyOrderDetail');
+
 
 Route::get('addcart/{id}', 'CartController@addCart')->name('client.addCart');
 Route::get('cart', 'CartController@getCart')->name('getCart');

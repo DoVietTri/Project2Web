@@ -60,7 +60,7 @@
                                         <span style="font-size:12px">{!! $order->created_at !!}</span>
                                     </td>
                                 </tr>
-                                @foreach($orderdetail as $val)
+                                
                                 <tr>
                                     <td align="left" valign="top" style="width:120px;padding-left:15px">
                                         <a href="#_" style="border:0"> 
@@ -77,7 +77,7 @@
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
                                                          <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
-                                                            {!! $val->product->name !!}
+                                                            
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -99,7 +99,7 @@
                                                     </td>
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
-                                                        {!! number_format($val->price, 0, ",", ".") !!}
+                                                        {!! number_format($order->money, 0, ",", ".") !!}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -117,7 +117,6 @@
                                         </table>
                                     </td>
                                 </tr>
-                                @endforeach
                                 <tr>
                                     <td colspan="2" align="center" valign="top" style="padding-top:20px;padding-bottom:20px;border-bottom:1px solid #ebebeb">
                                         <a href="#" style="border:0px" target="_blank"> 

@@ -40,5 +40,21 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$('button.view_info_order_detail').click(function() {
+		let txtrowid = $(this).attr('id');
+
+		$.ajax({
+			url: "http://localhost/WebGiay/mylistorder/" + txtrowid,
+			type: 'get',
+			cache: false,
+			data: {
+				id: txtrowid
+			},
+			success: function(data) {
+				$("#view_info_order_detail_1 .content").html(data.html);
+			}
+		}); 
+	});
 });
 

@@ -13,6 +13,8 @@ use App\Product;
 use App\Slider;
 use App\Mail\ShoppingMail;
 use Illuminate\Support\Facades\Mail;
+use App\Order;
+use App\OrderDetail;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,7 @@ class HomeController extends Controller
 		// 	'type' => 'error',
 		// 	'message' => 'Thành công'
 		// ]);
-		Mail::to('tri.dv270999@gmail.com')->send(new ShoppingMail());
+		//Mail::to('tri.dv270999@gmail.com')->send(new ShoppingMail());
 
 		$cate = Category::orderBy('id', 'DESC')->get();
 		$product = DB::table('products')->orderBy('id', 'DESC')->get();
@@ -44,5 +46,25 @@ class HomeController extends Controller
 	public function getCategory($id) {
 		$product = DB::table('products')->where('category_id', $id)->orderBy('id', 'DESC')->paginate(2);
 		return view('client.pages.category', compact('product', 'cate'));
+	}
+
+	public function getSearch(Request $request) {
+		$product = Product::where('name', 'like','%'.$request->txtNameProduct.'%')->get();
+
+		return view('client.pages.search', compact('product'));
+	}
+
+	public function getMyListOrder() {
+		$order = Order::where('user_id', Auth::user()->id)->get();
+		return view('client.pages.myorder', compact('order'));
+	}
+
+	public function getMyOrderDetail(Request $request, $id) {
+		if ($request->ajax()) {
+			$orders = OrderDetail::with('product')->where('order_id', $id)->get();
+            $html = view('client.pages.myorderdetail', compact('orders'))->render();
+            
+            return response(['html' => $html]);
+		}
 	}
 }

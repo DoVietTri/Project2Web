@@ -11,6 +11,8 @@
                             </li>
                             <li><a href="{!! route('getCheckout') !!}"><i class="fa fa-user"></i> Thanh toán</a>
                             </li>
+                            <li><a href=""><i class="fa fa-user"></i> Đơn hàng</a>
+                            </li>
                             <li><a href="{!! route('client.getLogout') !!}"> Đăng xuất </a>
                             </li>
                         </ul>
@@ -47,15 +49,19 @@
 <div class="site-branding-area">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="logo">
                     <h1><a href="{!! route('index') !!}"><img src="{{ url('public/client/img/logo.png') }}"></a></h1>
                 </div>
             </div>
-
-            <div class="col-sm-6">
+            <div class="col-sm-5" style="margin-top: 46px;">
+                <form action="{!! route('client.getSearch') !!}">
+                    <input style="width: 450px; height: 42px" type="text" name="txtNameProduct" placeholder="Nhập từ khóa...">
+                </form>
+            </div>
+            <div class="col-sm-4">    
                 <div class="shopping-item">
-                    @if(Auth::check())
+                    @if(Auth::check() && Session::has('cart'))
                         <a href="{!! route('getCart') !!}" >Giỏ hàng - <span class="cart-amunt">{!! Cart::subtotal(0, ",", ".") !!} VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{!! Cart::count() !!}</span></a>
                     @else
                         <a href="{!! route('client.getLogin') !!}">Giỏ hàng<span class="cart-amunt"></span><i class="fa fa-shopping-cart"></i></a>

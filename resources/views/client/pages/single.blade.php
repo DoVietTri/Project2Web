@@ -21,8 +21,8 @@
             <div class="col-md-4">
                 <div class="single-sidebar">
                     <h2 class="sidebar-title">Tìm kiếm sản phẩm</h2>
-                    <form action="">
-                        <input type="text" placeholder="Nhập từ khóa...">
+                    <form action="{!! route('client.getSearch') !!}" method="get">
+                        <input type="text" placeholder="Nhập từ khóa..." name="txtNameProduct">
                         <input type="submit" value="Search">
                     </form>
                 </div>

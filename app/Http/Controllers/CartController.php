@@ -116,8 +116,12 @@ class CartController extends Controller
             $product->quantity = $product->quantity - $cart->qty;
             $product->save();
         }
-        //Mail::to($order->email)->send(new ShoppingMail($order, $orderdetails));
+        //Mail::to($order->email)->send(new ShoppingMail($order));
         Cart::destroy();
+        \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đặt hàng thành công !'
+            ]);
         return redirect()->route('index');
     }
 }

@@ -13,16 +13,16 @@ class ShoppingMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $order;
-    public $orderdetail;
+    //public $orderdetail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order, $orderdetail)
+    public function __construct($order)
     {
         $this->order = $order;
-        $this->orderdetail = $orderdetail;
+       // $this->orderdetail = $orderdetail;
     }
 
     /**

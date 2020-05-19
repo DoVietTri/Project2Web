@@ -134,7 +134,8 @@ class UserController extends Controller
 
         if (Auth::attempt($data)) {
             if (Auth::user()->ruler == 1 || Auth::user()->ruler == 2) {
-                return redirect('admin/category/add');
+                
+                return redirect()->route('admin.index');
             }
         } else {
             return redirect()->back();

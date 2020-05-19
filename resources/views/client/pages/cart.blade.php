@@ -39,28 +39,30 @@
                                 <tbody>
                                     <form action="" method="POST">
                                         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                                        @foreach($content as $val)
-                                        <tr class="cart_item">
-                                            <td>                        
-                                                <input type="button" id="{!! $val->rowId !!}" value="Cập nhật" class="btn btn-primary updatecart">
-                                            </td>
-                                            <td>
-                                                <input type="button" id="{!! $val->rowId !!}" value="Xóa" class="btn btn-danger deletecart">
-                                            </td>
-                                            <td class="product-name">
-                                                {!! $val->name !!} 
-                                            </td>
-                                            <td>
-                                                <img style="height: 80px;" src="{!! asset('resources/upload/'.$val->options->img) !!}">
-                                            </td>
-                                            <td>
-                                                <input name="qty" class="qty" type="number" min="0" step="1" value="{!! $val->qty !!}">
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">{!! number_format($val->qty*$val->price, 0, ",", ".") !!} VNĐ</span>
-                                            </td>
-                                        </tr>    
-                                        @endforeach
+                                       @if (Session::has('cart'))
+                                             @foreach($content as $val)
+                                                <tr class="cart_item">
+                                                    <td>                        
+                                                        <input type="button" id="{!! $val->rowId !!}" value="Cập nhật" class="btn btn-primary updatecart">
+                                                    </td>
+                                                    <td>
+                                                        <input type="button" id="{!! $val->rowId !!}" value="Xóa" class="btn btn-danger deletecart">
+                                                    </td>
+                                                    <td class="product-name">
+                                                        {!! $val->name !!} 
+                                                    </td>
+                                                    <td>
+                                                        <img style="height: 80px;" src="{!! asset('resources/upload/'.$val->options->img) !!}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="qty" class="qty" type="number" min="0" step="1" value="{!! $val->qty !!}">
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">{!! number_format($val->qty*$val->price, 0, ",", ".") !!} VNĐ</span>
+                                                    </td>
+                                                </tr>    
+                                            @endforeach
+                                       @endif
                                     </form>
                                 </tbody>
                                 <tfoot>
