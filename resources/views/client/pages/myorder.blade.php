@@ -28,20 +28,27 @@
             	@foreach($order as $val)
             	<tr>
             		<td>
-            			<button class="btn btn-info view_info_order_detail" data-id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail_1">{!! $val->code_order !!}</button>
+            			<button class="btn btn-info view_info_order_detail" id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail_1">{!! $val->code_order !!}</button>
             		</td>
             		<td>{!! $val->created_at !!}</td>
             	
             		<td>{!! number_format($val->money, 0, ",", ".") !!} VNĐ</td>
-            		<td>Đang xử lý</td>
+            		<td>
+                        @if ($val->status == 0)
+                            Chờ xử lý
+                        @elseif($val->status == 1)
+                            Đang giao hàng
+                        @elseif($val->status == 2)
+                            Đã xử lý
+                        @endif      
+                    </td>
             	</tr>
             	@endforeach
             </tbody>
             <tfoot>
             	<tr>
                     <th>Mã đơn hàng</th>
-                    <th>Ngày mua</th>
-                    
+                    <th>Ngày mua</th>                  
                     <th>Tổng tiền</th>
                     <th>Trạng thái đơn hàng</th>
                 </tr>
@@ -49,7 +56,7 @@
         </table>
 	</div>
 </div>
-<div class="modal" tabindex="-1" role="dialog" id="view_order_detail_1" aria-labelledby="view_order_detail" aria-hidden="true">
+<div class="modal" tabindex="-1" role="dialog" id="view_order_detail_1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

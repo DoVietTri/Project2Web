@@ -11,7 +11,7 @@
                             </li>
                             <li><a href="{!! route('getCheckout') !!}"><i class="fa fa-user"></i> Thanh toán</a>
                             </li>
-                            <li><a href=""><i class="fa fa-user"></i> Đơn hàng</a>
+                            <li><a href="{!! route('client.getMyListOrder') !!}"><i class="fa fa-user"></i> Đơn hàng</a>
                             </li>
                             <li><a href="{!! route('client.getLogout') !!}"> Đăng xuất </a>
                             </li>
@@ -32,7 +32,7 @@
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
-                            <a href="">Liên hệ</a>
+                            <a href="{!! route('getContact') !!}">Liên hệ</a>
                         </li>
 
                         <li class="dropdown dropdown-small">

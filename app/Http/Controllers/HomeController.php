@@ -61,6 +61,7 @@ class HomeController extends Controller
 
 	public function getMyOrderDetail(Request $request, $id) {
 		if ($request->ajax()) {
+
 			$orders = OrderDetail::with('product')->where('order_id', $id)->get();
             $html = view('client.pages.myorderdetail', compact('orders'))->render();
             

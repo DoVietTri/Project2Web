@@ -39,22 +39,6 @@
                         </div>
                     @endforeach
                 </div>
-
-                <div class="single-sidebar">
-                    <h2 class="sidebar-title">Recent Posts</h2>
-                    <ul>
-                        <li><a href="">Sony Smart TV - 2015</a>
-                        </li>
-                        <li><a href="">Sony Smart TV - 2015</a>
-                        </li>
-                        <li><a href="">Sony Smart TV - 2015</a>
-                        </li>
-                        <li><a href="">Sony Smart TV - 2015</a>
-                        </li>
-                        <li><a href="">Sony Smart TV - 2015</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
             <div class="col-md-8">
@@ -93,10 +77,6 @@
                                     </div>
                                     <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
                                 </form>
-
-                                <div class="product-inner-category">
-                                    <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-                                </div>
 
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">

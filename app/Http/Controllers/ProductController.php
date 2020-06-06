@@ -141,23 +141,19 @@ class ProductController extends Controller
         return redirect()->route('admin.product.getList')->with(['flash_level' => 'success', 'flash_message' => 'Thành công ! Sửa sản phẩm thành công']);
 	}
 
-    public function getDelImg($id) {
+    public function getDelImg(Request $request, $id) {
 
-    	if (Request::ajax()) {
-            $idHinh = (int) Request::get('id');
-            $image_detail = ProductImage::find($idHinh);
-
-            if (!empty($image)) {
+        if ($request->ajax()) {
+            $image_detail = ProductImage::find($id);
+            if (!empty($image_detail)) {
                 $img = 'resources/upload/detail/'.$image_detail->image;
-                
                 if (File::exists($img)) {
                     File::delete($img);
                 }
-
                 $image_detail->delete();
             }
-            return "Oke";
         }
+        return "oke";
     }	
 
 }

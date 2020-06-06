@@ -23,7 +23,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function(
 	Route::group(['prefix' => 'order'], function() {
 		Route::get('order', 'AdminController@getOrder')->name('admin.order');
 		Route::get('order/delete/{id}', 'AdminController@deleteOrder')->name('admin.order.delete');
-		Route::get('order/detail/{id}', 'AdminController@orderDetail')->name('admin.order.orderDetail');
+		Route::get('order/detail/{id}', 'AdminController@getOrderDetail')->name('admin.order.getOrderDetail');
+		Route::post('order/detail/{id}', 'AdminController@postOrderDetail')->name('admin.order.postOrderDetail');
+		
+		Route::get('order/filter/{status}', 'AdminController@getFilterOrder')->name('admin.order.getFilterOrder');
 	});
 
 
@@ -78,7 +81,7 @@ Route::get('category/{id}/{alias}', 'HomeController@getCategory')->name('client.
 Route::get('product/{id}/{alias}', 'HomeController@getSingle')->name('client.getSingle');
 Route::get('search', 'HomeController@getSearch')->name('client.getSearch');
 Route::get('mylistorder', 'HomeController@getMyListOrder')->name('client.getMyListOrder');
-Route::get('myorderdetail/id', 'HomeController@getMyOrderDetail')->name('client.getMyOrderDetail');
+Route::get('myorderdetail/{id}', 'HomeController@getMyOrderDetail')->name('client.getMyOrderDetail');
 
 
 Route::get('addcart/{id}', 'CartController@addCart')->name('client.addCart');
@@ -87,6 +90,8 @@ Route::get('updatecart/{id}', 'CartController@updateCart')->name('updateCart');
 Route::get('deletecart/{id}', 'CartController@deleteCart')->name('deleteCart');
 Route::get('checkout', 'CartController@getCheckout')->name('getCheckout');
 Route::post('checkout', 'CartController@postCheckout')->name('postCheckout');
+Route::get('contact', 'ContactController@getContact')->name('getContact');
+Route::post('contact', 'ContactController@postContact')->name('postContact');
 
 
 

@@ -5,7 +5,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
                     <h2>u<span>Stora</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    <p>Địa chỉ: Đại Học Bách Khoa Hà Nội</p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -17,18 +17,12 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">User Navigation </h2>
-                    <ul>
-                        <li><a href="#">My account</a>
-                        </li>
-                        <li><a href="#">Order history</a>
-                        </li>
-                        <li><a href="#">Wishlist</a>
-                        </li>
-                        <li><a href="#">Vendor contact</a>
-                        </li>
-                        <li><a href="#">Front page</a>
-                        </li>
+                    <h2 class="footer-wid-title">Điều hướng</h2>
+                    <ul>    
+                        @if (Auth::check())
+                            <li><a href="{!! route('client.getMyListOrder') !!}">Lịch sử đặt hàng</a>
+                            </li>
+                        @endif                   
                     </ul>
                 </div>
             </div>

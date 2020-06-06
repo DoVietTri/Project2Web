@@ -48,9 +48,9 @@
                     </td>
                     <td>
                         @if($value->status == 1)
-                            Hiển thị
+                            Hết hàng
                         @else
-                            Không hiển thị
+                            Còn hàng
                         @endif
                     </td>
                     <td>           

@@ -12,7 +12,9 @@ class AdminController extends Controller
 {
     public function getIndex() {
     	$user = User::count();
-    	return view('admin.pages.index', compact('user'));
+        $order = Order::where('status', 0)->count();
+        $money = Order::sum('money');
+    	return view('admin.pages.index', compact('user', 'order', 'money'));
     }
 
     public function getOrder() {
@@ -28,16 +30,18 @@ class AdminController extends Controller
     	return redirect()->back();
     }
 
-    public function orderDetail(Request $request,$id) {
+    public function getOrderDetail($id) {
+        $order = OrderDetail::with('product')->where('order_id', $id)->get();
+        $info = Order::find($id);
+        return view('admin.pages.order.orderdetail', compact('order', 'info'));
+    }
+
+    public function postOrderDetail(Request $request, $id) {
+        $order = DB::table('orders')->where('id', $id)->update(['status'=> $request->transaction]);
+        return redirect()->route('admin.order');
+    }
+
+    public function getFilterOrder($status) {
         
-        if ($request->ajax()) {
-
-            $orders = OrderDetail::with('product')->where('order_id', $id)->get();
-            $html = view('admin.pages.order.orderdetail', compact('orders'))->render();
-            
-            return response(['html' => $html]);
-
-        }
-    
     }
 }

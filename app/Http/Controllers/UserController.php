@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 use App\Http\Requests\UserRequest;
+use DB;
+
 
 class UserController extends Controller
 {
@@ -15,7 +17,8 @@ class UserController extends Controller
         //  'type' => 'success',
         //  'message' => 'Vui lòng đăng nhập trước khi mua hàng'
         // ]);
-		return view('client.pages.login');
+        $product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+		return view('client.pages.login', compact('product_selling'));
 	}
 
 	public function postLogin(Request $req) {
@@ -70,7 +73,8 @@ class UserController extends Controller
 	}
 
     public function getRegister() {
-    	return view('client.pages.register');
+        $product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+    	return view('client.pages.register', compact('product_selling'));
     }
 
     public function postRegister(Request $request) {

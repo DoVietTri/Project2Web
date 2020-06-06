@@ -10,7 +10,7 @@ class OrderDetail extends Model
 
     protected $fillable = ['price', 'quantity', 'product_id', 'order_id'];
 
-    public function order() {
+    public function orders() {
     	return $this->hasMany('App\Order');
     }
 

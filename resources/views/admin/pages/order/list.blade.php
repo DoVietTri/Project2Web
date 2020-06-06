@@ -6,6 +6,16 @@
 @section('content')
 
 <div class="card-body">
+    
+    <form action="" method="post">
+        <select id="statusOrder" name="" style="width: 200px; height: 30px">
+            <option value="0">Lọc trạng thái đơn hàng</option>
+            <option value="1">Chờ xử lý</option>
+            <option value="2">Đã xử lý</option>
+        </select>
+    </form>
+    
+    <br>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -38,15 +48,19 @@
                         </td>
                         <td>{!! number_format($val->money, 0, ",", ".") !!} VNĐ</td>
                         <td>
+                    
                             @if ($val->status == 0)
                                 <a href="" class="badge badge-secondary">Chờ xử lý</a>
-                            @else
+                            @elseif ($val->status == 1)
+                                <a href="" class="badge badge-info">Đang giao hàng </a>
+                            @elseif ($val->status == 2)
                                 <a href="" class="badge badge-success">Đã xử lý</a>
                             @endif        
                         </td>
                         <td>
                             <a href="{!! route('admin.order.delete', $val->id) !!}" type="button" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
-                            <button class="btn btn-info view_info_order" data-id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button>
+                            <a href="{!! route('admin.order.getOrderDetail', $val->id) !!}" type="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                            <!-- <button class="btn btn-info view_info_order" data-id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button> -->
                         </td>
                     </tr>
                 @endforeach
