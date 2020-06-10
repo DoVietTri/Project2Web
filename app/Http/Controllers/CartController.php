@@ -116,7 +116,7 @@ class CartController extends Controller
             $product->quantity = $product->quantity - $cart->qty;
             $product->save();
         }
-        //Mail::to($order->email)->send(new ShoppingMail($order));
+        Mail::to($order->email)->send(new ShoppingMail($order));
         Cart::destroy();
         \Session::flash('toastr', [
                 'type' => 'success',

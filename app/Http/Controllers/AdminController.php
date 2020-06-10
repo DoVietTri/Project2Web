@@ -41,7 +41,18 @@ class AdminController extends Controller
         return redirect()->route('admin.order');
     }
 
-    public function getFilterOrder($status) {
-        
+    public function getFilterOrder(Request $req, $status) {
+
+        if ($req->ajax()) {
+            if ($status >= 0 && $status <= 2) {
+                $filter = DB::table('orders')->where('status', $status)->get();
+                $html = view('admin.pages.order.filter', compact('filter'))->render();
+            } else if ($status == 3){
+                $filter = DB::table('orders')->get();
+                 $html = view('admin.pages.order.filter', compact('filter'))->render();
+            }
+            
+            return response(['html' => $html]);
+        }   
     }
 }

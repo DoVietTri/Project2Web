@@ -47,7 +47,7 @@
                         Giá khuyến mại: {!! number_format($value->promotional, 0, ",", ".") !!} VNĐ
                     </td>
                     <td>
-                        @if($value->status == 1)
+                        @if($value->quantity == 0)
                             Hết hàng
                         @else
                             Còn hàng

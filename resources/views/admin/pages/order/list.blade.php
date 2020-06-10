@@ -7,16 +7,17 @@
 
 <div class="card-body">
     
-    <form action="" method="post">
-        <select id="statusOrder" name="" style="width: 200px; height: 30px">
-            <option value="0">Lọc trạng thái đơn hàng</option>
-            <option value="1">Chờ xử lý</option>
+    <form action="" method="get">
+        <select  id="statusOrder" name="" style="width: 250px; height: 30px">
+            <option value="3">Lọc trạng thái đơn hàng...</option>
+            <option value="0">Chờ xử lý</option>
+            <option value="1">Đang giao hàng</option>
             <option value="2">Đã xử lý</option>
         </select>
     </form>
     
     <br>
-    <div class="table-responsive">
+    <div class="table-responsive content_filter">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -60,7 +61,7 @@
                         <td>
                             <a href="{!! route('admin.order.delete', $val->id) !!}" type="button" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
                             <a href="{!! route('admin.order.getOrderDetail', $val->id) !!}" type="button" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                            <!-- <button class="btn btn-info view_info_order" data-id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail"><i class="fas fa-eye"></i></button> -->
+                           
                         </td>
                     </tr>
                 @endforeach

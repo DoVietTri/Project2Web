@@ -22,17 +22,19 @@ $(document).ready(function(){
 
 	$("a.delete_image_detail").click(function(){
 		var idHinh = $(this).parent().find("img").attr("id");
-		// var txt_token = $("form[name=frmEditProduct]").find("input[name='_token']").val();
+		//var txt_token = $("form[name=frmEditProduct]").find("input[name='_token']").val();
 		// var idImage = $(this).parent().find("img").attr("id");
 
 		$.ajax({
 			url: 'http://localhost/WebGiay/admin/product/delImg/' + idHinh,
 			type: 'get',
 			cache: false,
+			data: {
+				'id': idHinh
+			},
 			success: function(data) {
 				if (data = "oke") {
-					$("#" + idHinh).remove();
-				} else {
+					$(this).remove();
 					location.reload();
 				}
 			}
@@ -40,6 +42,15 @@ $(document).ready(function(){
 	});
 
 	$("#statusOrder").on('change', function() {
-		
+
+		var status = $(this).val();
+		$.ajax({
+			url: 'http://localhost/WebGiay/admin/order/order/filter/' + status,
+			type: 'get',
+			cache: false,
+			success: function(data) {
+				$(".content_filter").html(data.html);
+			}
+		});
 	});
 });

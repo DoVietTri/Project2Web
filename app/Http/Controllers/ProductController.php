@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Http\Requests\ProductRequest;
 use App\ProductImage;
 use File;
-use Request;
 
 class ProductController extends Controller
 {
@@ -83,29 +82,26 @@ class ProductController extends Controller
     	$product = Product::find($id);
 
     	$this->validate($request, [
-    		'txtProductName'  => 'required|unique:products,name',
+    		'txtProductName'  => 'required',
     		'nquantity'   => 'required',
     		'txtPrice'    => 'required|numeric',
     		'txtPromotional'  => 'numeric',
     		'fImage'   => 'image',
-    		'fImageDetail'  => 'image',
     		'txtStatus'   => 'required'
     	], [
     		'txtProductName.required'  => 'Vui lòng nhập tên sản phẩm',
-    		'txtProductName.unique'    => 'Tên sản phẩm đã tồn tại', 
     		'nquantity.required'  => 'Vui lòng nhập số lượng', 
     		'txtPrice.required'   => 'Vui lòng nhập giá sản phẩm',
     		'txtPrice.numeric'    => 'Giá sản phẩm phải là kiểu số',
     		'txtPromotional.numeric'  => 'Giá khuyến mại phải là kiểu số',
     		'fImage.image'   => 'File ảnh đại diện nhập vào không đúng định dạng',
-    		'fImageDetail.image'   => 'File ảnh detail nhập vào không đúng định dạng',
     		'txtStatus.required'   => 'Vui lòng nhập trạng thái'  
     	]);
 
 		
 
 		$check = request('fImage');
-        $image_current = 'resources/upload/'.Request::input('img_current');
+        $image_current = 'resources/upload/'.$request->img_current;
 
         if ($check) {
             $file_name = $request->file('fImage')->getClientOriginalName();
@@ -115,6 +111,7 @@ class ProductController extends Controller
                 File::delete($image_current);
             }
         }
+
         $product->name = $request->txtProductName;
         $product->alias = changeTitle($request->txtProductName);
         $product->price = $request->txtPrice;
@@ -125,17 +122,16 @@ class ProductController extends Controller
 
         $product->save();
 
-        if (!empty(Request::file('fImageDetail'))) {
-            foreach (Request::file('fImageDetail') as $file) {
+        if ($request->file('fImageDetail')) {
+            foreach ($request->file('fImageDetail') as $file) {
                 $product_img = new ProductImage;
                 if (isset($file)) {
                     $product_img->image = $file->getClientOriginalName();
                     $product_img->product_id = $id;
-                    $request->file('fImageDetail')->move('resources/upload/detail/', $file->getClientOriginalName());
+                    $file->move('resources/upload/detail/', $file->getClientOriginalName());
                     $product_img->save();
-                }
+                }   
             }
-
         }
 
         return redirect()->route('admin.product.getList')->with(['flash_level' => 'success', 'flash_message' => 'Thành công ! Sửa sản phẩm thành công']);
@@ -144,7 +140,10 @@ class ProductController extends Controller
     public function getDelImg(Request $request, $id) {
 
         if ($request->ajax()) {
-            $image_detail = ProductImage::find($id);
+
+            $idHinh =(int) $request->get('id');
+            $image_detail = ProductImage::find($idHinh);
+
             if (!empty($image_detail)) {
                 $img = 'resources/upload/detail/'.$image_detail->image;
                 if (File::exists($img)) {
@@ -152,8 +151,9 @@ class ProductController extends Controller
                 }
                 $image_detail->delete();
             }
+            return "oke";
         }
-        return "oke";
+        
     }	
 
 }

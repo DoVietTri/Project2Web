@@ -22,6 +22,11 @@
                         @if (Auth::check())
                             <li><a href="{!! route('client.getMyListOrder') !!}">Lịch sử đặt hàng</a>
                             </li>
+                            <li><a href="{!! route('client.getLogout') !!}">Đăng xuất</a></li>
+
+                        @else
+                            <li><a href="{!! route('client.getRegister') !!}">Đăng kí</a></li>
+                            <li><a href="{!! route('client.getLogin') !!}">Đăng nhập</a></li>    
                         @endif                   
                     </ul>
                 </div>
@@ -29,18 +34,12 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">Categories</h2>
+                    <h2 class="footer-wid-title">Danh mục</h2>
                     <ul>
-                        <li><a href="#">Mobile Phone</a>
+                        @foreach($category as $val)
+                        <li><a href="{!! route('client.Category', [$val->id, $val->alias]) !!}">{!! $val->name !!}</a>
                         </li>
-                        <li><a href="#">Home accesseries</a>
-                        </li>
-                        <li><a href="#">LED TV</a>
-                        </li>
-                        <li><a href="#">Computer</a>
-                        </li>
-                        <li><a href="#">Gadets</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

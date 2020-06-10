@@ -11,10 +11,11 @@ use DB;
 use View;
 use App\Product;
 use App\Slider;
-use App\Mail\ShoppingMail;
-use Illuminate\Support\Facades\Mail;
+// use App\Mail\ShoppingMail;
+// use Illuminate\Support\Facades\Mail;
 use App\Order;
 use App\OrderDetail;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -68,4 +69,5 @@ class HomeController extends Controller
             return response(['html' => $html]);
 		}
 	}
+
 }

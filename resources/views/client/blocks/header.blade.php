@@ -31,10 +31,15 @@
             <div class="col-md-4">
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a href="{!! route('getContact') !!}">Liên hệ</a>
-                        </li>
-
+                        @if (Auth::check())
+                            <li class="dropdown dropdown-small">
+                                <a href="{!! route('getContact') !!}">Liên hệ</a>
+                            </li>
+                        @else
+                            <li class="dropdown dropdown-small">
+                                <a href="{!! route('client.getLogin') !!}">Liên hệ</a>
+                            </li>
+                        @endif
                         <li class="dropdown dropdown-small">
                             <a  href="#"></a>
                         </li>
@@ -61,7 +66,7 @@
             </div>
             <div class="col-sm-4">    
                 <div class="shopping-item">
-                    @if(Auth::check() && Session::has('cart'))
+                    @if(Auth::check())
                         <a href="{!! route('getCart') !!}" >Giỏ hàng - <span class="cart-amunt">{!! Cart::subtotal(0, ",", ".") !!} VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{!! Cart::count() !!}</span></a>
                     @else
                         <a href="{!! route('client.getLogin') !!}">Giỏ hàng<span class="cart-amunt"></span><i class="fa fa-shopping-cart"></i></a>

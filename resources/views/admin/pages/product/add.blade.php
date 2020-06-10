@@ -49,7 +49,7 @@
             </fieldset>
             @for($i = 1; $i <= 3; $i = $i + 1)
             <fieldset class="form-group">
-                <label>Hình ảnh detail thứ {!! $i !!}</label>
+                <label>Hình ảnh chi tiết thứ {!! $i !!}</label>
                 <input type="file" name="fImageDetail[]">
             </fieldset>
             @endfor

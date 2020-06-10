@@ -37,11 +37,11 @@
             </fieldset>
             <fieldset class="form-group">
                 <label>Đơn giá</label>
-                <input type="text" class="form-control" value="{!! old('txtPrice',number_format($product->price, '0', ',' , '.')) !!}" placeholder="Vui lòng nhập đơn giá" name="txtPrice">
+                <input type="text" class="form-control" value="{!! old('txtPrice',$product->price) !!}" placeholder="Vui lòng nhập đơn giá" name="txtPrice">
             </fieldset>
             <fieldset class="form-group">
                 <label>Giá khuyến mại</label>
-                <input type="text" class="form-control" value="{!! old('txtPromotional', number_format($product->promotional, '0', ',' , '.')) !!}" placeholder="Nhập giá khuyến mại nếu có" name="txtPromotional">
+                <input type="text" class="form-control" value="{!! old('txtPromotional',$product->promotional) !!}" placeholder="Nhập giá khuyến mại nếu có" name="txtPromotional">
             </fieldset>
             <fieldset class="form-group">
                 <label>Hình ảnh đại diện</label>
@@ -55,10 +55,16 @@
                 <label>Hình ảnh detail thứ {!! $key + 1 !!}</label>
                 <img id="{!! $item->id !!}" style="height: 150px;" src="{!! asset('resources/upload/detail/'.$item['image']) !!}">
                 <a style="position: relative; top: -60px; right: 30px" class="btn btn-danger delete_image_detail"><i class="fa fa-times"></i></a>
-                <label style="margin-left: 30px;">Hình ảnh detail thay thế (nếu có) thứ {!! $key + 1 !!}</label>
-                <input type="file" name="fImageDetail[]">
             </fieldset>
             @endforeach
+
+            @for ($i = 1; $i <= 3; $i++) 
+                <fieldset class="form-group">
+                    <label>Hình ảnh chi tiết thứ {!! $i !!} (nếu có thay đổi)</label>
+                    <input type="file" name="fImageDetail[]">
+                </fieldset>
+            @endfor
+
             <fieldset class="form-group">
                 <label>Mô tả</label>
                 <textarea rows="3" class="form-control" name="txtDescription">{!! old('txtDescription', $product->description) !!}</textarea>
@@ -70,8 +76,7 @@
                     <option value="2">Không hiển thị</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-success">Thêm</button>
-            <button type="reset" class="btn btn-primary">Làm mới</button>
+            <button type="submit" class="btn btn-success">Sửa</button>
         </form>
     </div>
 </div>

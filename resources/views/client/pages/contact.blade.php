@@ -18,6 +18,10 @@
         <form action="{!! route('postContact') !!}" method="POST">
             {{ csrf_field() }}
             <div class="form-group" style="margin:0 auto; width: 70%">
+                <label>Tên người dùng</label>
+                <input type="text" name="txtUsername" value="{!! Auth::user()->name !!}">
+            </div>
+            <div class="form-group" style="margin:0 auto; width: 70%">
                 <label>Phản hồi</label>
                 <textarea rows="8" cols="70" placeholder="Viết tin nhắn phản hồi vào đây..." name="txtMessage"></textarea>
             </div>

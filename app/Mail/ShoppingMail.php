@@ -32,6 +32,6 @@ class ShoppingMail extends Mailable
      */
     public function build()
     {
-        return $this->from('doviettri27091999@gmail.com')->view('mail.shopping');
+        return $this->view('mail.shopping');
     }
 }

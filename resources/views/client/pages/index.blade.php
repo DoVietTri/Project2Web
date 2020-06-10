@@ -125,7 +125,7 @@
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Vừa xem gần đây</h2>
                     <a href="#" class="wid-view-more">Xem tất cả</a>
-                    <div class="single-wid-product">
+                    <!-- <div class="single-wid-product">
                         <a href="single-product.html"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb">
                         </a>
                         <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
@@ -139,7 +139,7 @@
                         <div class="product-wid-price">
                             <ins>$400.00</ins> <del>$425.00</del>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-4">
