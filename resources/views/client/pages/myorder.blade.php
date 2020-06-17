@@ -26,23 +26,48 @@
             </thead>
             <tbody>
             	@foreach($order as $val)
-            	<tr>
-            		<td>
-            			<button class="btn btn-info view_info_order_detail" id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail_1">{!! $val->code_order !!}</button>
-            		</td>
-            		<td>{!! $val->created_at !!}</td>
-            	
-            		<td>{!! number_format($val->money, 0, ",", ".") !!} VNĐ</td>
-            		<td>
-                        @if ($val->status == 0)
-                            Chờ xử lý
-                        @elseif($val->status == 1)
-                            Đang giao hàng
-                        @elseif($val->status == 2)
-                            Đã xử lý
-                        @endif      
-                    </td>
-            	</tr>
+
+                    @if ($val->status == 2)
+                            <tr>
+                                <td>
+                                    <button class="btn btn-info view_info_order_detail" id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail_1"><s>{!! $val->code_order !!}</s></button>
+                                </td>
+                                <td><s>{!! $val->created_at !!}</s></td>
+                            
+                                <td><s>{!! number_format($val->money, 0, ",", ".") !!} VNĐ</s></td>
+                                <td>
+                                    <s>
+                                        @if ($val->status == 0)
+                                        Chờ xử lý
+                                        @elseif($val->status == 1)
+                                            Đang giao hàng
+                                        @elseif($val->status == 2)
+                                            Đã xử lý
+                                        @endif   
+                                    </s>   
+                                </td>
+                            </tr>
+                        
+                    @else
+                        <tr>
+                            <td>
+                                <button class="btn btn-info view_info_order_detail" id="{!! $val->id !!}" data-toggle="modal" data-target="#view_order_detail_1">{!! $val->code_order !!}</button>
+                            </td>
+                            <td>{!! $val->created_at !!}</td>
+                        
+                            <td>{!! number_format($val->money, 0, ",", ".") !!} VNĐ</td>
+                            <td>
+                                @if ($val->status == 0)
+                                    Chờ xử lý
+                                @elseif($val->status == 1)
+                                    Đang giao hàng
+                                @elseif($val->status == 2)
+                                    Đã xử lý
+                                @endif      
+                            </td>
+                        </tr>
+                    @endif
+                	
             	@endforeach
             </tbody>
             <tfoot>
@@ -73,7 +98,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>

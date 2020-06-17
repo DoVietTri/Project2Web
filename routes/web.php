@@ -15,19 +15,27 @@ use Illuminate\Support\Facades\Route;
 //Admin
 Route::get('admin/login', ['as' => 'admin.getLogin', 'uses' => 'UserController@getLoginAdmin']);
 Route::post('admin/login',['as' => 'admin.postLogin', 'uses' => 'UserController@postLoginAdmin']);
+Route::get('admin/logout', ['as' => 'admin.getLogout', 'uses' => 'UserController@getLogoutAdmin']);
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function() {
 	Route::get('index', 'AdminController@getIndex')->name('admin.index');
 	
+
 	Route::group(['prefix' => 'order'], function() {
 		Route::get('order', 'AdminController@getOrder')->name('admin.order');
 		Route::get('order/delete/{id}', 'AdminController@deleteOrder')->name('admin.order.delete');
 		Route::get('order/detail/{id}', 'AdminController@getOrderDetail')->name('admin.order.getOrderDetail');
 		Route::post('order/detail/{id}', 'AdminController@postOrderDetail')->name('admin.order.postOrderDetail');
-		
 		Route::get('order/filter/{status}', 'AdminController@getFilterOrder')->name('admin.order.getFilterOrder');
+		Route::get('order/export-order-to-excel', 'AdminController@excel')->name('admin.order.export');
 	});
+
+	Route::group(['prefix' => 'contact'], function() {
+		Route::get('list', 'ContactController@getList')->name('admin.contact.getList');
+		Route::get('delete/{id}', 'ContactController@getDelete')->name('admin.contact.getDelete');
+		Route::get('filter/{status}', 'ContactController@getContactFilter')->name('admin.contact.getFilterContact');
+	});	
 
 
 	Route::group(['prefix' => 'category'], function() {
@@ -38,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function(
 		Route::get('edit/{id}', ['as' => 'admin.category.getEdit', 'uses' => 'CategoryController@getEdit']);
 		Route::post('edit/{id}', ['as' => 'admin.category.postEdit', 'uses' => 'CategoryController@postEdit']);
 	});
+
 	Route::group(['prefix' => 'product'], function() {
 		Route::get('add', ['as' => 'admin.product.getAdd', 'uses' => 'ProductController@getAdd']);
 		Route::post('add', ['as' => 'admin.product.postAdd', 'uses' => 'ProductController@postAdd']);
@@ -46,6 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function(
 		Route::get('edit/{id}', ['as' => 'admin.product.getEdit', 'uses' => 'ProductController@getEdit']);
 		Route::post('edit/{id}', ['as' => 'admin.product.postEdit', 'uses' => 'ProductController@postEdit']);
 		Route::get('delImg/{id}', ['as' => 'admin.product.getDelImg', 'uses' => 'ProductController@getDelImg']);
+		Route::get('export-to-excel', 'ProductController@excel')->name('admin.product.excel');
 	});
 	Route::group(['prefix' => 'slider'], function() {
 		Route::get('add', 'SliderController@getAdd')->name('admin.slider.getAdd');
@@ -60,8 +70,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminMiddleware'], function(
 		Route::get('add', 'UserController@getAdd')->name('admin.user.getAdd');
 		Route::post('add', 'UserController@postAdd')->name('admin.user.postAdd');
 		Route::get('delete/{id}', 'UserController@getDelete')->name('admin.user.getDelete');
-		Route::get('edit/{id}', 'UserController@getEdit')->name('admin.user.getEdit');
-		Route::post('edit/{id}', 'UserController@postEdit')->name('admin.user.postEdit');
+		// Route::get('edit/{id}', 'UserController@getEdit')->name('admin.user.getEdit');
+		// Route::post('edit/{id}', 'UserController@postEdit')->name('admin.user.postEdit');
+		Route::get('export-user-to-excel', 'UserController@excel')->name('admin.user.excel');
+		Route::get('unlock-account/{id}', 'UserController@getUnlock')->name('admin.user.getUnlock');
+		Route::get('lock-account/{id}', 'UserController@getLock')->name('admin.user.getLock');
 	});
 });
 

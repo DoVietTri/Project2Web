@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fd0b0db3-bbf4-4244-b319-68781dd27b1b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Function/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Function/function.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ProductRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ProductRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_07_074712_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_07_074712_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_07_074940_create_contacts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_07_074940_create_contacts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/admin/js/myScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/admin/js/myScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/blocks/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blocks/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/blocks/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blocks/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/category/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/category/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/order/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/order/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/product/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/product/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/product/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/product/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/slider/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/slider/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/slider/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/slider/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/slider/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/slider/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/user/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/user/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/category.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/myorder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/myorder.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client/pages/single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client/pages/single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mail/shopping.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mail/shopping.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dSL8lrLyH5VnqSik9yV86YxtZO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fd0b0db3-bbf4-4244-b319-68781dd27b1b" name="Default Changelist" comment="" />
+      <created>1592413391415</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592413391415</updated>
+      <workItem from="1592413399165" duration="43000" />
+    </task>
+    <servers />
+  </component>
+</project>

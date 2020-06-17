@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->text('description');
             $table->integer('status'); //Xác nhận xem tình trạng hàng còn hay hết
-
+            $table->integer('product_pay')->default(0); //
             $table->foreignId('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 

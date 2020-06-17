@@ -34,7 +34,11 @@
                             <img src="{!! asset('resources/upload/'.$val->image) !!}" class="recent-thumb" alt="">
                             <h2><a href="">{!! $val->name !!}</a></h2>
                             <div class="product-sidebar-price">
-                                <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                                @if ($val->promotional == 0)
+                                    <ins>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</ins>
+                                @else
+                                    <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -68,16 +72,28 @@
                             <div class="product-inner">
                                 <h2 class="product-name">{!! $product->name !!}</h2>
                                 <div class="product-inner-price">
-                                    <ins>{!! number_format($product->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($product->price, 0, ",", ".") !!} VNĐ</del>
+                                    @if ($product->promotional == 0)
+                                        {!! number_format($product->price, 0, ",", ".") !!} VNĐ</ins>
+                                    @else
+                                        <ins>{!! number_format($product->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($product->price, 0, ",", ".") !!} VNĐ</del>
+                                    @endif
                                 </div>
 
-                                <form action="" class="cart">
-                                    <div class="quantity">
-                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                    </div>
-                                    <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
-                                </form>
-
+                                @if (Auth::check())
+                                    <form action="{!! route('client.addCart', $product->id)  !!}" class="cart">
+                                        <div class="quantity">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="qty" min="1" step="1">
+                                        </div>
+                                        <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+                                    </form>
+                                @else
+                                    <form action="{!! route('client.getLogin')  !!}" class="cart">
+                                        <div class="quantity">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="qty" min="1" step="1">
+                                        </div>
+                                        <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+                                    </form>
+                                @endif
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Mô tả</a>
@@ -145,7 +161,11 @@
                                 <h2><a href="">{!! $val->name !!}</a></h2>
 
                                 <div class="product-carousel-price">
-                                    <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                                    @if ($val->promotional == 0)
+                                        <ins>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</ins>
+                                    @else
+                                        <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                                    @endif
                                 </div>
                             </div>
                             @endforeach

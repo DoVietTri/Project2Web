@@ -22,15 +22,28 @@
             <fieldset class="form-group">
                 <label>Tên slider</label>
                 <input type="text" class="form-control" value="{!! old('txtSlider', $slider->name) !!}" placeholder="Vui lòng nhập tên slider" name="txtSlider">
+                 @if ($errors->first('txtSlider'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            {{ $errors->first('txtSlider') }}
+                        </ul>
+                    </div>
+                @endif
             </fieldset>
             <fieldset class="form-group">
                 <label>Hình ảnh hiện tại</label>
                 <img style="height: 90px;" src="{!! asset('resources/upload/slider/'.$slider->image) !!}">
                 <label>Hình ảnh thay thế</label>
                 <input type="file" name="fImage">
+                 @if ($errors->first('fImage'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            {{ $errors->first('fImage') }}
+                        </ul>
+                    </div>
+                @endif
             </fieldset>
             <button type="submit" class="btn btn-success">Cập nhật</button>
-            <button type="reset" class="btn btn-primary">Làm mới</button>
         </form>
     </div>
 </div>

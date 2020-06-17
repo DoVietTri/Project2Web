@@ -8,6 +8,9 @@ use App\Product;
 use App\Http\Requests\ProductRequest;
 use App\ProductImage;
 use File;
+use Excel;
+use DB;
+use App\Exports\ProductExports;
 
 class ProductController extends Controller
 {
@@ -33,6 +36,7 @@ class ProductController extends Controller
     	$product->description = $request->txtDescription;
     	$product->image = $img_name;
     	$product->status = $request->txtStatus;
+        $product->product_pay = 0;
     	$product->category_id  = $request->txtCateName;
     	$request->file('fImage')->move('resources/upload/', $img_name);
 
@@ -85,7 +89,6 @@ class ProductController extends Controller
     		'txtProductName'  => 'required',
     		'nquantity'   => 'required',
     		'txtPrice'    => 'required|numeric',
-    		'txtPromotional'  => 'numeric',
     		'fImage'   => 'image',
     		'txtStatus'   => 'required'
     	], [
@@ -93,7 +96,6 @@ class ProductController extends Controller
     		'nquantity.required'  => 'Vui lòng nhập số lượng', 
     		'txtPrice.required'   => 'Vui lòng nhập giá sản phẩm',
     		'txtPrice.numeric'    => 'Giá sản phẩm phải là kiểu số',
-    		'txtPromotional.numeric'  => 'Giá khuyến mại phải là kiểu số',
     		'fImage.image'   => 'File ảnh đại diện nhập vào không đúng định dạng',
     		'txtStatus.required'   => 'Vui lòng nhập trạng thái'  
     	]);
@@ -154,6 +156,10 @@ class ProductController extends Controller
             return "oke";
         }
         
+    }
+
+    public function excel() {
+        return Excel::download(new ProductExports, 'products.xlsx');
     }	
 
 }

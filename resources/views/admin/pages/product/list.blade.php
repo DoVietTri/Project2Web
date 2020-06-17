@@ -5,6 +5,9 @@
 
 @section('content')
 
+<div style="margin: 0 auto; margin-top: 20px">
+    <a href="{{ route('admin.product.excel') }}" class="btn btn-primary">Export to Excel</a>
+</div>
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -44,7 +47,9 @@
                         <br>
                         Đơn giá: {!! number_format($value->price, 0, ",", ".") !!} VNĐ
                         <br>
-                        Giá khuyến mại: {!! number_format($value->promotional, 0, ",", ".") !!} VNĐ
+                        @if ($value->promotional != 0)
+                            Giá khuyến mại: {!! number_format($value->promotional, 0, ",", ".") !!} VNĐ
+                        @endif    
                     </td>
                     <td>
                         @if($value->quantity == 0)

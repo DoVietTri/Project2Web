@@ -15,9 +15,11 @@
   <link href="{{ url('public/assets/admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
  <!--  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
   <!-- <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script> -->
   <!-- Custom styles for this template-->
   <link href="{{ url('public/assets/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://codeseven.github.io/toastr/build/toastr.min.css" rel="stylesheet" type="text/css" />
    @if (session('toastr'))
@@ -26,6 +28,8 @@
             var MESSAGE = "{{ session('toastr.message') }}";
         </script>
     @endif
+
+    <script src="{{ url('public/assets/admin/vendor/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body id="page-top">
@@ -50,21 +54,6 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           @yield('contentAdmin')
-          <div class="card shadow mb-4">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">@yield('controller') <b>@yield('action')</b></h6><h5>
-                </div>
-                    @if (Session::has('flash_message'))
-                        <div class="alert alert-{!! Session::get('flash_level') !!}">
-                            {!! Session::get('flash_message') !!}
-                        </div>
-                    @endif
-
-                @yield('content')
-              </div> 
-          </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -107,7 +96,7 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="{{ url('public/assets/admin/vendor/jquery/jquery.min.js') }}"></script>
+
   <script src="{{ url('public/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->

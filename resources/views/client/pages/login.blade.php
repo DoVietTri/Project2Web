@@ -21,8 +21,8 @@
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Tìm kiếm</h2>
-                        <form action="">
-                            <input type="text" placeholder="Tìm kiếm...">
+                        <form action="{{ route('client.getSearch') }}" method="get">
+                            <input name="txtNameProduct" type="text" placeholder="Tìm kiếm...">
                             <input type="submit" value="Tìm kiếm">
                         </form>
                     </div>
@@ -51,14 +51,20 @@
                                 <p>Vui lòng đăng nhập tài khoản của bạn để nhận được nhiều ưu đãi hơn</p>
 
                                 <p class="form-row form-row-first">
-                                    <label for="email">Email <span class="required">*</span>
+                                    <label for="email">Email <span class="required" style="color: red;">*</span>
                                     </label>
-                                    <input type="text" id="txtEmail" name="txtEmail" class="input-text">
+                                    <input type="text" id="txtEmail" name="txtEmail" value="" class="input-text">
+                                    @if ($errors->first('txtEmail')) 
+                                        <small style="color: red" class="form-text invalid-feedback">{{ $errors->first('txtEmail') }}</small>
+                                    @endif
                                 </p>
                                 <p class="form-row form-row-last">
-                                    <label for="password">Mật khẩu <span class="required">*</span>
+                                    <label for="password">Mật khẩu <span class="required" style="color: red;">*</span>
                                     </label>
                                     <input type="password" id="password" name="txtPassword" class="input-text">
+                                    @if ($errors->first('txtPassword')) 
+                                        <small style="color: red" class="form-text invalid-feedback">{{ $errors->first('txtPassword') }}</small>
+                                    @endif
                                 </p>
                                 <div class="clear"></div>
 

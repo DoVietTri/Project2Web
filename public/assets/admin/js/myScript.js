@@ -53,4 +53,17 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	$("#statusMessage").on('change', function() {
+		var status = $(this).val();
+		$.ajax({
+			url: 'http://localhost/WebGiay/admin/contact/filter/' + status,
+			type: 'get',
+			cache: false,
+			success: function(data) {
+				alert(data);
+				//$(".content_contact").html(data.html);
+			}
+		});
+	});
 });

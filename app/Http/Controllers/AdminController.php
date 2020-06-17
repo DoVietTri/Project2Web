@@ -7,14 +7,46 @@ use App\User;
 use App\Order;
 use App\OrderDetail;
 use DB;
+use App\Contact;
+use Carbon\Carbon;
+use Excel;
+use App\Exports\OrderExports;
+
 
 class AdminController extends Controller
 {
     public function getIndex() {
-    	$user = User::count();
+        $user = User::count();
         $order = Order::where('status', 0)->count();
-        $money = Order::sum('money');
-    	return view('admin.pages.index', compact('user', 'order', 'money'));
+
+        //Hàm lấy doanh thu tháng hiện tại
+        $money = Order::whereMonth('created_at', date('m'))->where('status', 2)->sum('money');
+        
+
+        //Lấy doanh thu của từng tháng trong năm
+        $totalMonth = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $total = Order::whereMonth('created_at', $i)->where('status', 2)->sum('money');
+            array_push($totalMonth, $total);
+        }
+
+        $totalMonth = json_encode($totalMonth);
+
+        //Thống kê trạng thái đơn hàng
+        //Đã xử lý
+        $statusSuccess = Order::where('status', 2)->select('id')->count();
+        //Chờ xử lý
+        $statusDefault = Order::where('status', 0)->select('id')->count();
+        //Đang giao hàng
+        $statusProcess = Order::where('status', 1)->select('id')->count();
+
+        $statusTransaction = [$statusDefault, $statusProcess, $statusSuccess];
+        $statusTransaction = json_encode($statusTransaction);
+
+        //Thống kê liên hệ mới
+        $contact_new = Contact::where('status', 0)->count();
+
+    	return view('admin.pages.index', compact('user', 'order', 'money', 'statusTransaction', 'totalMonth', 'contact_new'));
     }
 
     public function getOrder() {
@@ -54,5 +86,9 @@ class AdminController extends Controller
             
             return response(['html' => $html]);
         }   
+    }
+
+    public function excel() {
+        return Excel::download(new OrderExports, 'order.xlsx');
     }
 }

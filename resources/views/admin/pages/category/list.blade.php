@@ -4,7 +4,9 @@
 @section('action', 'List')
 
 @section('content')
-
+<div style="margin: 0 auto; margin-top: 20px">
+    <a href="#" class="btn btn-primary">Export to Excel</a>
+</div>
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'txtCateName' => 'required',
             'txtProductName'  => 'required|unique:products,name',
-            'quantity'  => 'min:1',
+            'nquantity'  => 'min:1',
             'txtPrice'  => 'required',
             'fImage'  => 'required|image',
             'txtStatus'  => 'required' 
@@ -37,7 +37,7 @@ class ProductRequest extends FormRequest
         return [
             'txtCateName.required'  => 'Vui lòng chọn tên danh mục',
             'txtProductName.required'  => 'Vui lòng nhập tên sản phẩm',
-            'quantity.min'  => 'Số lượng sản phẩm nhỏ nhất là 1',
+            'nquantity.min'  => 'Số lượng sản phẩm nhỏ nhất là 1',
             'txtPrice.required'  => 'Vui lòng nhập giá của sản phẩm', 
             'fImage.required'  => 'Vui lòng chọn file', 
             'fImage.image'   => 'File vừa chọn không phải hình ảnh',

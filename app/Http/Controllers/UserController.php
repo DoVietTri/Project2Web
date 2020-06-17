@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Hash;
 use App\Http\Requests\UserRequest;
 use DB;
+use Excel;
+use App\Exports\UserExports;
 
 
 class UserController extends Controller
@@ -17,7 +19,7 @@ class UserController extends Controller
         //  'type' => 'success',
         //  'message' => 'Vui lòng đăng nhập trước khi mua hàng'
         // ]);
-        $product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+        $product_selling = DB::table('products')->orderBy('product_pay', 'DESC')->skip(0)->take(3)->get();
 		return view('client.pages.login', compact('product_selling'));
 	}
 
@@ -33,7 +35,8 @@ class UserController extends Controller
 
 		$data = [
 			'email' => $req->txtEmail,
-			'password'  => $req->txtPassword
+			'password'  => $req->txtPassword,
+            'status' => 0
 		];
 
 		if (Auth::attempt($data)) {
@@ -73,7 +76,7 @@ class UserController extends Controller
 	}
 
     public function getRegister() {
-        $product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+        $product_selling = DB::table('products')->orderBy('product_pay', 'DESC')->skip(0)->take(3)->get();
     	return view('client.pages.register', compact('product_selling'));
     }
 
@@ -114,11 +117,25 @@ class UserController extends Controller
     }
 
     public function getProfile() {
-    	return view('client.pages.account');
+    	if (Auth::check()) {
+            return view('client.pages.account');
+        } else {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng xuât thành công !'
+
+            ]);
+            return redirect()->route('index');
+        }
     }
 
     public function getLoginAdmin() {
-        return view('admin.login');
+
+        if (Auth::check() && (Auth::user()->ruler == 1 || Auth::user()->ruler == 2)) {
+            return redirect()->route('admin.index');
+        } else {
+            return view('admin.login');
+        }
     }
 
     public function postLoginAdmin(Request $request) {
@@ -133,21 +150,49 @@ class UserController extends Controller
 
         $data = [
             'email'  => $request->txtEmail,
-            'password'  => $request->txtPassword
+            'password'  => $request->txtPassword,
+            'status' => 0
         ];
 
         if (Auth::attempt($data)) {
             if (Auth::user()->ruler == 1 || Auth::user()->ruler == 2) {
-                
+                \Session::flash('toastr', [
+                    'type' => 'success',
+                    'message' => 'Đăng nhập thành công !'
+
+                ]);
                 return redirect()->route('admin.index');
             }
         } else {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Đăng nhập không thành công !'
+
+            ]);
+            return view('admin.login');
+        }
+    }
+
+    public function getLogoutAdmin() {
+        if (Auth::logout()) {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Đăng xuất không thành công !'
+
+            ]);
             return redirect()->back();
+        } else {
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng xuất thành công !'
+
+            ]);
+            return redirect()->route('index');
         }
     }
 
     public function getList() {
-        $user = User::select('id', 'name', 'email', 'ruler')->orderBy('id', 'DESC')->get();
+        $user = User::select('id', 'name', 'email', 'ruler', 'status')->orderBy('id', 'DESC')->get();
         return view('admin.pages.user.list', compact('user'));
     }
 
@@ -177,5 +222,33 @@ class UserController extends Controller
             $user->delete();
             return redirect()->route('admin.user.getList')->with(['flash_level' => 'success', 'flash_message' => 'Thành công ! Xóa thành viên thành công']);
         }
+    }
+
+    public function excel() {
+        return Excel::download(new UserExports, 'users.xlsx');
+    }
+
+    public function getUnlock($id) {
+
+        $user = User::find($id);
+        $user_current = Auth::user()->id;
+        if ($id == 1 || $user_current != 1 && $user->ruler == 2) {
+            return redirect()->route('admin.user.getList')->with(['flash_level' => 'danger', 'flash_message' => 'Bạn không có quyền mở khóa tài khoản thành viên này']);
+        } else {
+            \DB::table('users')->where('id', $id)->update(['status' => 0]);
+            return redirect()->route('admin.user.getList')->with(['flash_level' => 'success', 'flash_message' => 'Mở khóa tài khoản thành công !']);
+        }
+    }
+
+    public function getLock($id) {
+
+        $user = User::find($id);
+        $user_current = Auth::user()->id;
+        if ($id == 1 || $user_current != 1 && $user->ruler == 2) {
+            return redirect()->route('admin.user.getList')->with(['flash_level' => 'danger', 'flash_message' => 'Bạn không có quyền khóa tài khoản thành viên này']);
+        } else {
+            \DB::table('users')->where('id', $id)->update(['status' => 1]);
+            return redirect()->route('admin.user.getList')->with(['flash_level' => 'success', 'flash_message' => 'Khóa tài khoản thành công !']);
+        } 
     }
 }

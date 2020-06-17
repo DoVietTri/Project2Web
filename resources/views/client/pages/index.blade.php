@@ -81,7 +81,11 @@
                             <h2><a href="{!! route('client.getSingle', [$val->id, $val->alias]) !!}">{!! $val->name !!}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{!! number_format($val->promotional,0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price,0, ",", ".") !!} VNĐ</del>
+                                @if ($val->promotional == 0)
+                                    <ins>{!! number_format($val->price,0, ",", ".") !!} VNĐ</ins>
+                                @else
+                                    <ins>{!! number_format($val->promotional,0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price,0, ",", ".") !!} VNĐ</del>
+                                @endif
                             </div>
                         </div>
                         @endforeach
@@ -114,7 +118,11 @@
                                 <i class="fa fa-star"></i>
                             </div>
                             <div class="product-wid-price">
-                                <ins>{!! number_format($item->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($item->price, 0, ",", ".") !!} VNĐ</del>
+                                @if ($item->promotional == 0)
+                                    <ins>{!! number_format($item->price, 0, ",", ".") !!} VNĐ</ins>
+                                @else
+                                    <ins>{!! number_format($item->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($item->price, 0, ",", ".") !!} VNĐ</del>
+                                @endif
                             </div>
                         </div>
                     @endforeach    
@@ -159,7 +167,11 @@
                             <i class="fa fa-star"></i>
                         </div>
                         <div class="product-wid-price">
-                            <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                            @if ($val->promotional == 0)
+                                <ins>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</ins>
+                            @else
+                                <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                            @endif
                         </div>
                     </div>
                     @endforeach

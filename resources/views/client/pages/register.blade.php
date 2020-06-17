@@ -51,24 +51,36 @@
                                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                                 <p>Vui lòng đăng nhập tài khoản của bạn để nhận được nhiều ưu đãi hơn</p>
                                 <p class="form-row form-row-first">
-                                    <label for="username">Tên tài khoản <span class="required">*</span>
+                                    <label for="username">Tên tài khoản <span class="required" style="color: red">*</span>
                                     </label>
                                     <input type="text" id="txtUsername" name="txtUsername" class="input-text">
+                                    @if ($errors->first('txtUsername'))
+                                        <small class="form-text invalid-feedback">{{ $errors->first('txtUsername') }}</small>
+                                    @endif
                                 </p>
                                 <p class="form-row form-row-first">
-                                    <label for="email">Email <span class="required">*</span>
+                                    <label for="email">Email <span class="required" style="color: red">*</span>
                                     </label>
                                     <input type="text" id="txtEmail" name="txtEmail" class="input-text">
+                                    @if ($errors->first('txtEmail'))
+                                        <small class="form-text invalid-feedback">{{ $errors->first('txtEmail') }}</small>
+                                    @endif
                                 </p>
                                 <p class="form-row form-row-last">
-                                    <label for="password">Mật khẩu <span class="required">*</span>
+                                    <label for="password">Mật khẩu <span class="required" style="color: red">*</span>
                                     </label>
                                     <input type="password" id="password" name="txtPassword" class="input-text">
+                                    @if ($errors->first('txtPassword'))
+                                        <small class="form-text invalid-feedback">{{ $errors->first('txtPassword') }}</small>
+                                    @endif
                                 </p>
                                 <p class="form-row form-row-last">
-                                    <label for="password">Nhập lại mật khẩu <span class="required">*</span>
+                                    <label for="password">Nhập lại mật khẩu <span class="required" style="color: red">*</span>
                                     </label>
                                     <input type="password" id="password" name="txtRePassword" class="input-text">
+                                    @if ($errors->first('txtRePassword'))
+                                        <small class="form-text invalid-feedback">{{ $errors->first('txtRePassword') }}</small>
+                                    @endif
                                 </p>
                                 <div class="clear"></div>
 

@@ -23,11 +23,19 @@ class CartController extends Controller
     public function addCart($id, Request $req) {
     	$product = Product::find($id);
 
-    	if ($req->qty) {
-    		$qty = $req->qty;
+        $val = $req->qty;
+    	if ($val) {
+    		$qty = $val;
     	} else {
     		$qty = 1;
     	}
+        if ($qty > $product->quantity) {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Sản phẩm đã hết hàng'
+            ]);
+            return redirect()->back();
+        }
 
     	if ($product->promotional > 0) {
     		$price = $product->promotional;
@@ -70,10 +78,21 @@ class CartController extends Controller
     }
 
     public function getCheckout() {
-        $user = Auth::user();
-        $content = Cart::content();
-        $price_total = Cart::subtotal();
-        return view('client.pages.checkout', compact('content', 'user', 'price_total'));
+
+        $item = Cart::count();
+
+        if ($item == 0) { 
+             \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Giỏ hàng chưa có sản phẩm !'
+            ]);
+            return redirect()->back();
+        } else {
+            $user = Auth::user();
+            $content = Cart::content(); 
+            $price_total = Cart::subtotal();
+            return view('client.pages.checkout', compact('content', 'user', 'price_total'));
+        }    
     }
 
     public function postCheckout(Request $request) {
@@ -91,37 +110,37 @@ class CartController extends Controller
             'txtPhone.required'     => 'Vui lòng nhập số điện thoại' 
         ]);
 
-        $order = new Order;
-        $order->user_id = Auth::user()->id;
-        $order->name  = $request->txtUsername;
-        $order->email = $request->txtEmail;
-        $order->address = $request->txtAddress;
-        $order->phone = $request->txtPhone;
-        $order->money = Cart::subtotal(0, ",", "");
-        $order->message = $request->txtNote;
-        $order->code_order = mt_rand();
-        $order->save();
+       $order = new Order;
+            $order->user_id = Auth::user()->id;
+            $order->name  = $request->txtUsername;
+            $order->email = $request->txtEmail;
+            $order->address = $request->txtAddress;
+            $order->phone = $request->txtPhone;
+            $order->money = Cart::subtotal(0, ",", "");
+            $order->message = $request->txtNote;
+            $order->code_order = mt_rand();
+            $order->save();
 
-        $id_order = $order->id;
-        //$orderdetails = array();
-        foreach(Cart::content() as $key => $cart) {
-            $orderdetail = new OrderDetail;
-            $orderdetail->order_id = $id_order;
-            $orderdetail->price = $cart->price;
-            $orderdetail->quantity = $cart->qty;
-            $orderdetail->product_id = $cart->id;
-            $orderdetail->save();
-            \DB::table('products')->where('id', $cart->id)->increment('status');
-            $product = Product::find($cart->id);
-            $product->quantity = $product->quantity - $cart->qty;
-            $product->save();
-        }
-        Mail::to($order->email)->send(new ShoppingMail($order));
-        Cart::destroy();
-        \Session::flash('toastr', [
-                'type' => 'success',
-                'message' => 'Đặt hàng thành công !'
-            ]);
-        return redirect()->route('index');
+            $id_order = $order->id;
+            //$orderdetails = array();
+            foreach(Cart::content() as $key => $cart) {
+                $orderdetail = new OrderDetail;
+                $orderdetail->order_id = $id_order;
+                $orderdetail->price = $cart->price;
+                $orderdetail->quantity = $cart->qty;
+                $orderdetail->product_id = $cart->id;
+                $orderdetail->save();
+                \DB::table('products')->where('id', $cart->id)->increment('product_pay');
+                $product = Product::find($cart->id);
+                $product->quantity = $product->quantity - $cart->qty;
+                $product->save();
+            }
+            Mail::to($order->email)->send(new ShoppingMail($order));
+            Cart::destroy();
+            \Session::flash('toastr', [
+                    'type' => 'success',
+                    'message' => 'Đặt hàng thành công !'
+                ]);
+            return redirect()->route('index');
     }
 }

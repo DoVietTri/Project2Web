@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="product-bit-title text-center">
-                    <h2>Danh mục</h2>
+                    <h2>{{ $cate->name }}</h2>
                 </div>
             </div>
         </div>
@@ -26,7 +26,11 @@
                     </div>
                     <h2><a href="{!! route('client.getSingle',[$val->id, $val->alias]) !!}">{!! $val->name !!}</a></h2>
                     <div class="product-carousel-price">
-                        <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                        @if ($val->promotional == 0)
+                            <ins>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</ins>
+                        @else
+                            <ins>{!! number_format($val->promotional, 0, ",", ".") !!} VNĐ</ins> <del>{!! number_format($val->price, 0, ",", ".") !!} VNĐ</del>
+                        @endif
                     </div>
 
                     <div class="product-option-shop">

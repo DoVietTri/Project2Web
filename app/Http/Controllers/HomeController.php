@@ -30,7 +30,7 @@ class HomeController extends Controller
 		$cate = Category::orderBy('id', 'DESC')->get();
 		$product = DB::table('products')->orderBy('id', 'DESC')->get();
 		$product_new = DB::table('products')->orderBy('id', 'DESC')->skip(0)->take(3)->get();
-		$product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+		$product_selling = DB::table('products')->orderBy('product_pay', 'DESC')->skip(0)->take(3)->get();
 		$slider = DB::table('sliders')->orderBy('id', 'DESC')->skip(0)->take(3)->get();
 		return view('client.pages.index', compact('product', 'product_new', 'slider', 'product_selling'));
 	}
@@ -38,13 +38,14 @@ class HomeController extends Controller
 	public function getSingle($id) {
 		$product = DB::table('products')->where('id', $id)->first();
 		$product_img = DB::table('product_images')->select('id', 'image')->where('product_id', $id)->get();
-		$product_selling = DB::table('products')->orderBy('status', 'DESC')->skip(0)->take(3)->get();
+		$product_selling = DB::table('products')->orderBy('product_pay', 'DESC')->skip(0)->take(3)->get();
 		$product_relate = DB::table('products')->where('category_id', $product->category_id)->orderBy('id', 'DESC')->get();
 		$cate = Product::find($id)->category;
 		return view('client.pages.single', compact('product', 'product_img', 'cate','product_selling', 'product_relate'));
 	}
 
 	public function getCategory($id) {
+		$cate = Category::find($id);
 		$product = DB::table('products')->where('category_id', $id)->orderBy('id', 'DESC')->paginate(2);
 		return view('client.pages.category', compact('product', 'cate'));
 	}
@@ -56,8 +57,13 @@ class HomeController extends Controller
 	}
 
 	public function getMyListOrder() {
-		$order = Order::where('user_id', Auth::user()->id)->get();
-		return view('client.pages.myorder', compact('order'));
+		if (Auth::check()) {
+			$order = Order::where('user_id', Auth::user()->id)->orderBy('status', 'ASC')->get();
+			return view('client.pages.myorder', compact('order'));
+		} else {
+			return redirect()->route('index');
+		}
+
 	}
 
 	public function getMyOrderDetail(Request $request, $id) {

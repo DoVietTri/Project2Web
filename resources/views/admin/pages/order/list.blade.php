@@ -4,7 +4,9 @@
 @section('action', 'List')
 
 @section('content')
-
+<div style="margin: 0 auto; margin-top: 20px">
+    <a href="{{ route('admin.order.export') }}" class="btn btn-primary">Export to Excel</a>
+</div>
 <div class="card-body">
     
     <form action="" method="get">

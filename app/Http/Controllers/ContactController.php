@@ -32,4 +32,29 @@ class ContactController extends Controller
             return redirect()->back();
         }	     
     }
+
+    public function getList() {
+        $contact = Contact::with('user')->orderBy('id', 'DESC')->get();
+        return view('admin.pages.contact.list', compact('contact'));
+    }
+
+    public function getDelete($id) {
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect()->route('admin.contact.getList')->with(['flash_level' => 'success', 'flash_message' => 'Xóa tin nhắn thành công']);
+    }
+
+    public function getContactFilter(Request $req, $status) {
+
+        if ($req->ajax()) {
+            if ($status == 2) {
+                $filter = DB::table('contacts')->get();
+                $html = view('admin.pages.contact.filter', compact('filter'));
+            } else {
+                $filter = DB::table('contacts')->where('status', $status)->get();
+                $html = view('admin.pages.contact.filter', compact('filter'));
+            }
+            return response(['html' => $html]);
+        }
+    }
 }
